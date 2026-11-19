@@ -1,0 +1,11 @@
+export const leadStatusOptions = ["New", "Qualified", "Follow-up", "Won", "Lost"] as const;
+export const leadPriorityOptions = ["Low", "Medium", "High", "Urgent"] as const;
+export const leadInterestOptions = ["Low", "Medium", "High", "Very High"] as const;
+export const preferredContactOptions = ["Email", "Phone", "WhatsApp", "Meeting"] as const;
+export const companySizeOptions = ["1-10", "11-50", "51-200", "201-500", "500+"] as const;
+export const industryOptions = ["Construction", "Manufacturing", "Retail", "Interior Design", "Architecture", "Engineering"] as const;
+export const leadSourceOptions = ["Website", "Referral", "LinkedIn", "Cold Call", "Event", "Partner"] as const;
+export const assignedToOptions = ["Anita Kapoor", "Suresh Mehta", "Priya Verma", "Rahul Nair", "Deepak Joshi"] as const;
+export const productOptions = ["Modular Kitchen", "Wardrobes", "Doors", "Furniture", "Interior Package"] as const;
+export const tagSuggestions = ["Export", "Manufacturer", "Retailer", "Importer", "Supplier", "Distributor", "VIP", "Hot Lead", "Cold Lead", "Repeat Customer"] as const;
+export const allowedAttachmentTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "image/png", "image/jpeg"];

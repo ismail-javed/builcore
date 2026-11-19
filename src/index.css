@@ -1,0 +1,550 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/**
+ * Tailwind CSS Theme Configuration
+ * Maps CSS custom properties to Tailwind color utilities
+ * 
+ * Usage in components:
+ * - bg-background → uses --background
+ * - text-foreground → uses --foreground
+ * - bg-sidebar → uses --sidebar
+ * - text-sidebar-foreground → uses --sidebar-foreground
+ * - bg-primary → uses --primary
+ * - text-primary-foreground → uses --primary-foreground
+ * - bg-sidebar-accent → uses --sidebar-accent
+ * - text-sidebar-accent-foreground → uses --sidebar-accent-foreground
+ */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* General UI Colors */
+  --color-background: var(--background); /* Main page background */
+  --color-foreground: var(--foreground); /* Main text color */
+  --color-card: var(--card); /* Card background */
+  --color-card-foreground: var(--card-foreground); /* Card text */
+  --color-popover: var(--popover); /* Popover/dropdown background */
+  --color-popover-foreground: var(--popover-foreground); /* Popover text */
+  --color-primary: var(
+    --primary
+  ); /* Primary actions (buttons, links) - CHANGES WITH ACCENT */
+  --color-primary-foreground: var(
+    --primary-foreground
+  ); /* Text on primary - auto-contrast */
+  --color-secondary: var(--secondary); /* Secondary elements */
+  --color-secondary-foreground: var(
+    --secondary-foreground
+  ); /* Text on secondary */
+  --color-muted: var(--muted); /* Muted backgrounds */
+  --color-muted-foreground: var(--muted-foreground); /* Muted text */
+  --color-accent: var(--accent); /* Accent highlights - CHANGES WITH ACCENT */
+  --color-accent-foreground: var(--accent-foreground); /* Text on accent */
+  --color-destructive: var(--destructive); /* Error/danger colors */
+  --color-border: var(--border); /* Border colors */
+  --color-input: var(--input); /* Input field backgrounds */
+  --color-ring: var(--ring); /* Focus ring - CHANGES WITH ACCENT */
+
+  /* Chart Colors - CHANGES WITH ACCENT */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar-Specific Colors */
+  --color-sidebar: var(--sidebar); /* Sidebar background - neutral */
+  --color-sidebar-foreground: var(
+    --sidebar-foreground
+  ); /* Sidebar text - neutral */
+  --color-sidebar-primary: var(
+    --sidebar-primary
+  ); /* Active sidebar item - CHANGES WITH ACCENT */
+  --color-sidebar-primary-foreground: var(
+    --sidebar-primary-foreground
+  ); /* Text on active - always light */
+  --color-sidebar-accent: var(
+    --sidebar-accent
+  ); /* Sidebar hover - CHANGES WITH ACCENT */
+  --color-sidebar-accent-foreground: var(
+    --sidebar-accent-foreground
+  ); /* Hover text - white in dark mode */
+  --color-sidebar-border: var(--sidebar-border); /* Sidebar borders */
+  --color-sidebar-ring: var(
+    --sidebar-ring
+  ); /* Sidebar focus ring - CHANGES WITH ACCENT */
+
+  /* BuildCore status / legacy tokens (accent-aware where noted) */
+  --color-bc-blue: var(--bc-blue);
+  --color-bc-blue-bg: var(--bc-blue-bg);
+  --color-bc-green: var(--bc-green);
+  --color-bc-green-bg: var(--bc-green-bg);
+  --color-bc-amber: var(--bc-amber);
+  --color-bc-amber-bg: var(--bc-amber-bg);
+  --color-bc-red: var(--bc-red);
+  --color-bc-red-bg: var(--bc-red-bg);
+  --color-bc-purple: var(--bc-purple);
+  --color-bc-purple-bg: var(--bc-purple-bg);
+  --color-bc-surface2: var(--bc-surface2);
+}
+
+/* Custom scrollbar that follows accent / primary colors */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(from var(--color-primary) r g b / 0.3) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(from var(--color-primary) r g b / 0.3);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(from var(--color-primary) r g b / 0.5);
+}
+
+/* Apply accent-aware scrollbar globally */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(from var(--color-primary) r g b / 0.3) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(from var(--color-primary) r g b / 0.3);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(from var(--color-primary) r g b / 0.5);
+}
+
+:root {
+  font-size: 90%;
+  --radius: 0.625rem;
+  /* Light Theme - Improved Contrast */
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.15 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0 0);
+  --primary: oklch(0.25 0 0);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.15 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: oklch(0.15 0 0);
+  --destructive: oklch(0.55 0.22 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.65 0 0);
+  --chart-1: oklch(0.55 0.2 264.376);
+  --chart-2: oklch(0.55 0.15 162.48);
+  --chart-3: oklch(0.45 0.1 227.392);
+  --chart-4: oklch(0.7 0.18 70.08);
+  --chart-5: oklch(0.6 0.2 303.9);
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.15 0 0);
+  --sidebar-primary: oklch(0.25 0 0);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0.15 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.65 0 0);
+
+  --bc-blue: var(--primary);
+  --bc-blue-bg: var(--accent);
+  --bc-green: oklch(0.6 0.18 150);
+  --bc-green-bg: oklch(0.94 0.06 150);
+  --bc-amber: oklch(0.55 0.15 65);
+  --bc-amber-bg: oklch(0.94 0.06 65);
+  --bc-red: oklch(0.58 0.22 15);
+  --bc-red-bg: oklch(0.94 0.08 15);
+  --bc-purple: oklch(0.55 0.24 295);
+  --bc-purple-bg: oklch(0.94 0.08 295);
+  --bc-surface2: var(--muted);
+}
+
+/**
+ * Dark Theme - Improved Contrast & Readability
+ * 
+ * Key improvements:
+ * - Darker background (0.12 → better OLED support)
+ * - Higher contrast text (0.95 instead of 0.985)
+ * - More distinct card backgrounds
+ * - Improved border visibility with slight opacity
+ * - Better muted text contrast
+ */
+.dark {
+  --background: oklch(0.12 0 0);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.9 0 0);
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: oklch(0.24 0 0);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.24 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.24 0 0);
+  --accent-foreground: oklch(0.95 0 0);
+  --destructive: oklch(0.65 0.2 27.325);
+  --destructive-foreground: oklch(0.95 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 18%);
+  --ring: oklch(0.5 0 0);
+  --chart-1: oklch(0.6 0.22 264.376);
+  --chart-2: oklch(0.65 0.18 162.48);
+  --chart-3: oklch(0.7 0.16 70.08);
+  --chart-4: oklch(0.6 0.24 303.9);
+  --chart-5: oklch(0.65 0.22 16.439);
+  --sidebar: oklch(0.16 0 0);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.6 0.22 264.376);
+  --sidebar-primary-foreground: oklch(0.95 0 0);
+  --sidebar-accent: oklch(0.22 0 0);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.5 0 0);
+
+  --bc-green-bg: oklch(0.26 0.08 150);
+  --bc-amber-bg: oklch(0.32 0.1 65);
+  --bc-red-bg: oklch(0.28 0.12 15);
+  --bc-purple-bg: oklch(0.28 0.12 295);
+}
+
+/**
+ * Green Accent - Refined for Better Contrast
+ * 
+ * Improvements:
+ * - Slightly darker green (0.65 → 0.60) for better contrast on light backgrounds
+ * - Increased chroma for more vibrant appearance
+ * - Better foreground contrast in light mode
+ */
+.accent-green {
+  --primary: oklch(0.6 0.18 150);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.94 0.06 150);
+  --accent-foreground: oklch(0.25 0.15 150);
+  --ring: oklch(0.6 0.18 150);
+  --chart-1: oklch(0.6 0.18 150);
+  --chart-2: oklch(0.55 0.16 165);
+  --chart-3: oklch(0.5 0.14 135);
+  --chart-4: oklch(0.65 0.2 155);
+  --chart-5: oklch(0.58 0.17 140);
+  --sidebar-primary: oklch(0.6 0.18 150);
+  --sidebar-accent: oklch(0.95 0.04 150);
+  --sidebar-accent-foreground: oklch(0.25 0.15 150);
+  --sidebar-ring: oklch(0.6 0.18 150);
+}
+
+.dark.accent-green {
+  --primary: oklch(0.68 0.18 150);
+  --primary-foreground: oklch(0.12 0 0);
+  --accent: oklch(0.26 0.08 150);
+  --accent-foreground: oklch(0.68 0.18 150);
+  --ring: oklch(0.68 0.18 150);
+  --chart-1: oklch(0.68 0.18 150);
+  --chart-2: oklch(0.63 0.16 165);
+  --chart-3: oklch(0.58 0.14 135);
+  --chart-4: oklch(0.73 0.2 155);
+  --chart-5: oklch(0.66 0.17 140);
+  --sidebar-primary: oklch(0.68 0.18 150);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.26 0.06 150);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-ring: oklch(0.68 0.18 150);
+}
+
+/**
+ * Purple Accent - More Vibrant & Balanced
+ * 
+ * Improvements:
+ * - Better hue (295 instead of 303.9) for richer purple
+ * - Improved contrast ratios
+ * - More saturated for better visibility
+ */
+.accent-purple {
+  --primary: oklch(0.55 0.24 295);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.94 0.08 295);
+  --accent-foreground: oklch(0.35 0.2 295);
+  --ring: oklch(0.55 0.24 295);
+  --chart-1: oklch(0.55 0.24 295);
+  --chart-2: oklch(0.5 0.22 280);
+  --chart-3: oklch(0.45 0.2 310);
+  --chart-4: oklch(0.6 0.26 285);
+  --chart-5: oklch(0.52 0.23 305);
+  --sidebar-primary: oklch(0.55 0.24 295);
+  --sidebar-accent: oklch(0.95 0.05 295);
+  --sidebar-accent-foreground: oklch(0.35 0.2 295);
+  --sidebar-ring: oklch(0.55 0.24 295);
+}
+
+.dark.accent-purple {
+  --primary: oklch(0.68 0.24 295);
+  --primary-foreground: oklch(0.12 0 0);
+  --accent: oklch(0.28 0.12 295);
+  --accent-foreground: oklch(0.68 0.24 295);
+  --ring: oklch(0.68 0.24 295);
+  --chart-1: oklch(0.68 0.24 295);
+  --chart-2: oklch(0.63 0.22 280);
+  --chart-3: oklch(0.58 0.2 310);
+  --chart-4: oklch(0.73 0.26 285);
+  --chart-5: oklch(0.65 0.23 305);
+  --sidebar-primary: oklch(0.68 0.24 295);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.28 0.08 295);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-ring: oklch(0.68 0.24 295);
+}
+
+/**
+ * Red Accent - Improved Warmth & Contrast
+ * 
+ * Improvements:
+ * - Warmer red (hue 15 → better emotional tone)
+ * - Better contrast on both themes
+ * - More balanced saturation
+ */
+.accent-red {
+  --primary: oklch(0.58 0.22 15);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.94 0.08 15);
+  --accent-foreground: oklch(0.35 0.18 15);
+  --ring: oklch(0.58 0.22 15);
+  --chart-1: oklch(0.58 0.22 15);
+  --chart-2: oklch(0.55 0.2 20);
+  --chart-3: oklch(0.5 0.18 10);
+  --chart-4: oklch(0.63 0.24 25);
+  --chart-5: oklch(0.53 0.19 8);
+  --sidebar-primary: oklch(0.58 0.22 15);
+  --sidebar-accent: oklch(0.95 0.05 15);
+  --sidebar-accent-foreground: oklch(0.35 0.18 15);
+  --sidebar-ring: oklch(0.58 0.22 15);
+}
+
+.dark.accent-red {
+  --primary: oklch(0.68 0.22 15);
+  --primary-foreground: oklch(0.12 0 0);
+  --accent: oklch(0.28 0.12 15);
+  --accent-foreground: oklch(0.68 0.22 15);
+  --ring: oklch(0.68 0.22 15);
+  --chart-1: oklch(0.68 0.22 15);
+  --chart-2: oklch(0.65 0.2 20);
+  --chart-3: oklch(0.6 0.18 10);
+  --chart-4: oklch(0.73 0.24 25);
+  --chart-5: oklch(0.63 0.19 8);
+  --sidebar-primary: oklch(0.68 0.22 15);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.28 0.08 15);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-ring: oklch(0.68 0.22 15);
+}
+
+/**
+ * Orange Accent - Warmer & More Energetic
+ * 
+ * Improvements:
+ * - Adjusted hue (65 instead of 70) for better orange
+ * - Better contrast in light mode
+ * - More vibrant without being overwhelming
+ */
+.accent-orange {
+  --primary: oklch(0.68 0.18 65);
+  --primary-foreground: oklch(0.12 0 0);
+  --accent: oklch(0.94 0.06 65);
+  --accent-foreground: oklch(0.45 0.15 65);
+  --ring: oklch(0.68 0.18 65);
+  --chart-1: oklch(0.68 0.18 65);
+  --chart-2: oklch(0.65 0.17 60);
+  --chart-3: oklch(0.58 0.15 70);
+  --chart-4: oklch(0.73 0.19 55);
+  --chart-5: oklch(0.63 0.16 75);
+  --sidebar-primary: oklch(0.68 0.18 65);
+  --sidebar-accent: oklch(0.95 0.04 65);
+  --sidebar-accent-foreground: oklch(0.45 0.15 65);
+  --sidebar-ring: oklch(0.68 0.18 65);
+}
+
+.dark.accent-orange {
+  --primary: oklch(0.73 0.18 65);
+  --primary-foreground: oklch(0.12 0 0);
+  --accent: oklch(0.32 0.1 65);
+  --accent-foreground: oklch(0.73 0.18 65);
+  --ring: oklch(0.73 0.18 65);
+  --chart-1: oklch(0.73 0.18 65);
+  --chart-2: oklch(0.7 0.17 60);
+  --chart-3: oklch(0.63 0.15 70);
+  --chart-4: oklch(0.78 0.19 55);
+  --chart-5: oklch(0.68 0.16 75);
+  --sidebar-primary: oklch(0.73 0.18 65);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.32 0.06 65);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-ring: oklch(0.73 0.18 65);
+}
+
+/**
+ * Blue Accent - Enhanced Default
+ * 
+ * Improvements:
+ * - Slightly more saturated for better visibility
+ * - Better contrast ratios
+ * - Refined hue (260 instead of 264.376) for cleaner blue
+ */
+.accent-blue {
+  --primary: oklch(0.55 0.2 260);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.94 0.08 260);
+  --accent-foreground: oklch(0.3 0.18 260);
+  --ring: oklch(0.55 0.2 260);
+  --chart-1: oklch(0.55 0.2 260);
+  --chart-2: oklch(0.5 0.18 245);
+  --chart-3: oklch(0.45 0.16 275);
+  --chart-4: oklch(0.6 0.22 250);
+  --chart-5: oklch(0.52 0.19 270);
+  --sidebar-primary: oklch(0.55 0.2 260);
+  --sidebar-accent: oklch(0.95 0.05 260);
+  --sidebar-accent-foreground: oklch(0.3 0.18 260);
+  --sidebar-ring: oklch(0.55 0.2 260);
+}
+
+.dark.accent-blue {
+  --primary: oklch(0.62 0.22 260);
+  --primary-foreground: oklch(0.12 0 0);
+  --accent: oklch(0.28 0.12 260);
+  --accent-foreground: oklch(0.62 0.22 260);
+  --ring: oklch(0.62 0.22 260);
+  --chart-1: oklch(0.62 0.22 260);
+  --chart-2: oklch(0.57 0.2 245);
+  --chart-3: oklch(0.52 0.18 275);
+  --chart-4: oklch(0.67 0.24 250);
+  --chart-5: oklch(0.59 0.21 270);
+  --sidebar-primary: oklch(0.62 0.22 260);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.28 0.08 260);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-ring: oklch(0.62 0.22 260);
+}
+
+/**
+ * NEW: Teal Accent - Modern & Professional
+ * 
+ * A fresh addition that works exceptionally well in both themes.
+ * Perfect balance between blue and green.
+ */
+.accent-teal {
+  --primary: oklch(0.58 0.16 195);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.94 0.06 195);
+  --accent-foreground: oklch(0.3 0.14 195);
+  --ring: oklch(0.58 0.16 195);
+  --chart-1: oklch(0.58 0.16 195);
+  --chart-2: oklch(0.53 0.14 185);
+  --chart-3: oklch(0.48 0.12 205);
+  --chart-4: oklch(0.63 0.18 190);
+  --chart-5: oklch(0.55 0.15 200);
+  --sidebar-primary: oklch(0.58 0.16 195);
+  --sidebar-accent: oklch(0.95 0.04 195);
+  --sidebar-accent-foreground: oklch(0.3 0.14 195);
+  --sidebar-ring: oklch(0.58 0.16 195);
+}
+
+.dark.accent-teal {
+  --primary: oklch(0.65 0.16 195);
+  --primary-foreground: oklch(0.12 0 0);
+  --accent: oklch(0.28 0.1 195);
+  --accent-foreground: oklch(0.65 0.16 195);
+  --ring: oklch(0.65 0.16 195);
+  --chart-1: oklch(0.65 0.16 195);
+  --chart-2: oklch(0.6 0.14 185);
+  --chart-3: oklch(0.55 0.12 205);
+  --chart-4: oklch(0.7 0.18 190);
+  --chart-5: oklch(0.62 0.15 200);
+  --sidebar-primary: oklch(0.65 0.16 195);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.28 0.06 195);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-ring: oklch(0.65 0.16 195);
+}
+
+/**
+ * Base Styles
+ * 
+ * Applies default styles using theme variables
+ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body {
+    @apply bg-background text-foreground font-light;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    overflow: hidden;
+    height: 100%;
+  }
+  #root {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/**
+ * Utility Classes
+ * Hide scrollbar while maintaining scroll functionality
+ */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-x-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-x-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-x-scrollbar [data-slot="table-container"] {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-x-scrollbar [data-slot="table-container"]::-webkit-scrollbar {
+  display: none;
+}
